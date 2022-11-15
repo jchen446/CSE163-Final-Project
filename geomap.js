@@ -8,11 +8,10 @@ var color = d3.scaleThreshold()
     .domain([1, 10, 50, 200, 500, 1000, 2000, 4000])
     .range(d3.schemeOrRd[9]);
 
-var projection = d3.geoAlbers()
-    .scale(6000)
-    .rotate( [76,0.1] ) //longitude
-    .center( [0, 43.2994] )
-    .translate([width / 2, height / 2]);
+var projection = d3.geoConicConformal()
+    .scale(850)
+    .rotate([15,1])
+    .translate([200, 1650]);
 
 var path = d3.geoPath()
     .projection(projection);
@@ -53,8 +52,7 @@ g.call(d3.axisBottom(x)
     .remove();
 
 d3.queue()
-    .defer(d3.json, "us-10m.json")
-    .defer(d3.csv, "Population-Density By County.csv", function(d) { if (d.GEO_displaylabel == "New York"){ rateById.set(d.GCT_STUB_targetgeoid2, +d.Density);}})
+    .defer(d3.json, "europe-10m.json")
     .await(ready);
     
  d3.select("button")
@@ -115,21 +113,21 @@ var tooltip = d3.select("body")
         .attr("class", "tooltip")
         .style("opacity", 0);
     
-function ready(error, us) {
+function ready(error, europe) {
   if (error) throw error;
 
   density = svg.append("g")
       .attr("class", "counties")
     .selectAll("path")
-      .data(topojson.feature(us, us.objects.counties).features)
+      .data(topojson.feature(europe, europe.objects.continent_Europe_subunits).features)
     .enter().append("path")
-      .attr("fill", function(d) {return color(rateById.get(d.id)); })
+      .attr("fill", "#ADD8E6")
       .attr("d", path)
     .on("mouseover", function(d) {
            tooltip.transition()
              .duration(200)
              .style("opacity", .9);
-           tooltip.html(d.properties.name + "<br>" + "<span style='float:left'>" + "Density per square mile" + "</span>" + ":" + "<span style='float:right'>" + rateById.get(d.id) + "</span>") 
+           tooltip.html(d.properties.geounit ) 
              .style("left", (d3.event.pageX) + "px")
              .style("top", (d3.event.pageY - 28) + "px");
            })
@@ -138,11 +136,12 @@ function ready(error, us) {
              .duration(500)
              .style("opacity", 0);
            });
-
-  boundaries = svg.append("path")
+    
+    boundaries = svg.append("path")
       .attr("class", "counties")
-      .datum(topojson.mesh(us, us.objects.counties, function(a, b) { if (rateById.has(a.id)){return a != b; }}))
+      .datum(topojson.mesh(europe, europe.objects.continent_Europe_subunits, function(a, b) { return a != b; }))
       .attr("stroke", "#000")
       .attr("stroke-opacity", 0.3)
       .attr("d", path);
+    
 }
