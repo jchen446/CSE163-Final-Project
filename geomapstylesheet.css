@@ -22,3 +22,66 @@ div.tooltip {
   border-radius: 8px;
   pointer-events: none;
 }
+
+#inds{
+    position:absolute;
+    top:200px;
+    left:1180px;
+}
+
+{
+    box-sizing: border-box;
+}
+
+#clearAll{
+    position:absolute;
+    top:195px;
+    left:1400px;
+}
+
+body {
+    padding: 10px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    padding: 0px;
+}
+
+.left, .right {
+    width: 25%;
+}
+
+.middle1, .middle2 {
+    width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.author {
+    line-height: 1;
+}
+
+#chart{
+    position:absolute;
+}
+
+#note{
+    position:relative;
+}
+
+.note {
+    background-color: aliceblue;
+}
+
+.line {
+    fill: none;
+    stroke: #EF5285;
+    stroke-width: 2px;
+}

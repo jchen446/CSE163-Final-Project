@@ -3,24 +3,73 @@
   <head>
     <!-- Meta Tag -->
     <meta charset="utf-8">
-    <title>D3 Scatterplot</title>
+    <title>Growth of European NBA Players: 1980 to 2022</title>
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" type="text/css" href="geomapstylesheet.css">
     <!-- D3.js Source -->
     <script type= "text/javascript" src="http://d3js.org/d3.v4.min.js"></script>       
   </head>
   <body>
-    <h1 style = "text-align:center; color:steelblue"><bold> California Population Density </bold></h1>
+    <h1 style = "text-align:center; color:steelblue"><bold>Progression of European Players in the NBA</bold></h1>
+    <p>
+     The sport of basketball is becoming more of a global game every single year. As television and social media's influence grows internationally, players from Europe are entering the National Basketball Association rapidly. Whether it be by being drafted in the lottery, developing in the G-League, or through highlight plays in FIBA and the Olympics, there are several avenues for European players to make their name known in the NBA.
+    </p>
+    <h2 style = "text-align:center; color:steelblue"><bold>Insights:</bold></h2>
+    <p>
+     We hope to bring light to the outstanding development of basketball talent growing outside of the United States. While there have been over 500 international players in the history of the NBA, over half of them have come from Europe. Some of the greatest players in history have originated from Europe, and we want to visualize this trend starting in 1980 to the NBA today. Our main graphic is a "Geomap'' of Europe which will paint an accurate picture on the disparity of NBA players from country to country. Implemented below is a scale that is used to fluctuate the data of the number of European players over a 6 year period. We collected data on the salaries and minutes played for all European players, and by using a "Multi-line Graph" we have plotted each country's average salary and average minutes played. To give a precise comparison between counties the viewer can select countries to focus on the graph. Finally, we will utilize a "Pie Chart" as a simplistic yet effective way to explain the totality of NBA players from European countries.
+    </p>
     <!-- Your D3.js code for making a Bar Graph -->
-    <svg width="960" height="1100"></svg>
+    <svg width="960" height="800"></svg>
     <script src="//d3js.org/d3.v4.min.js"></script>
     <script src="//d3js.org/topojson.v2.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <br>
     <button>Change to Blue</button>
     <button onclick="toggleboundaries()">Turn County Off </button>
     <script type="text/javascript" src="geomap.js"></script>
     <!-- Submission Info -->
-    <!--<h4>Created by "Your Name" </h4>-->
-      <h4>Jason Chen</h4>  
+    <div class = "note" id ="note"  style="position:relative;right:0px; font-size:16px; text-align:center;" id="myParagraph">
+        <div class = 'author'>
+            <h4 style="font-weight: bold"><br/>Created By</h4>
+                <p style="position:relative;top:0px;right:0px; font-size:16px; text-align:center;" id="myParagraph">
+                    &emsp; Jason Chen &emsp; &emsp;| &emsp; jchen446@ucsc.edu<br> 
+                    Rian Delarosa &emsp;&ensp; | &emsp; rjdelaro@ucsc.edu<br>
+                    Tanay Khajanchi &emsp;| &emsp; tkhajanc@ucsc.edu<br>
+                    &ensp;Andre Truong &ensp; &emsp;| &emsp; anvtruon@ucsc.edu</p>
+                <p>GitHub Link: <a href="https://github.com/jchen446/CSE163-Final-Project">https://github.com/jchen446/CSE163-Final-Project</a></p>
+            <h4 style="font-weight: bold">Designed For</h4>
+                <p id="myParagraph">CSE 163: Data Programming for Visualization, Fall 2022</p>
+        </div>
+        <div class="row">
+          <div class="column left">
+            <b>Files Submitted</b>
+            <p>geomap.html<br>geomap.js<br>geomapstylesheet.css<br>europe-10m.json<br>Population-Density By County.csv</p>
+          </div>
+          <div class="column middle1">
+            <b>Data Sources</b>
+            <p>
+            <a data-brackets-id='62' href="https://www.basketball-reference.com/">Basketball Reference: Stats and History</a><br>
+            <a data-brackets-id='62' href="https://www.spotrac.com/nba/country/">Spotrac: NBA Country Tracker</a><br>
+            <a data-brackets-id='62' href="https://en.wikipedia.org/wiki/List_of_NBA_players_born_outside_the_United_States">List of NBA Players Born Outside of U.S.</a>
+            </p>
+          </div>
+          <div class="column middle2">
+            <b>Visual Sources</b>
+            <p id="myParagraph">
+            <a data-brackets-id='62' href="https://sureshlodha.github.io/CSE163_Spring2020/projects/heidler/index-1.html">California Wildfires 2008 to 2016</a><br/>
+            <a data-brackets-id='62' href="https://wshuang6.github.io/d3-nba-visualization/">Visualizing the NBA</a><br/>
+            <a data-brackets-id='62' href="https://github.com/LemonChiu/NBA-Visualization">Visualizing of NBA 2014-2015</a>
+        </p>
+          </div>
+          <div class="column right">
+            <b>Code Sources</b>
+            <p>
+            <a data-brackets-id='62' href="https://www.d3indepth.com/geographic/">Making Maps with D3</a><br/>
+            <a data-brackets-id='62' href="https://datawanderings.com/2018/10/28/making-a-map-in-d3-js-v-5/">Making a Map in D3 v.5</a><br/>
+            <a data-brackets-id='62' href="https://bl.ocks.org/dianaow/0da76b59a7dffe24abcfa55d5b9e163e">D3 v.4 Multi-line Chart: Hover Tooltip</a>  
+            </p>
+          </div>
+        </div>
+    </div>
   </body>
 </html>

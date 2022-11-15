@@ -5,20 +5,20 @@ var svg = d3.select("svg"),
 var rateById = d3.map();
 
 var color = d3.scaleThreshold()
-    .domain([1, 10, 50, 200, 500, 1000, 2000, 4000])
+    .domain([1, 2, 5, 10, 20, 30, 40, 50])
     .range(d3.schemeOrRd[9]);
 
 var projection = d3.geoConicConformal()
-    .scale(850)
+    .scale(600)
     .rotate([15,1])
-    .translate([200, 1650]);
+    .translate([200, 1200]);
 
 var path = d3.geoPath()
     .projection(projection);
     
     var x = d3.scaleSqrt()
-    .domain([0, 4500])
-    .rangeRound([440, 950]);
+    .domain([0, 50])
+    .rangeRound([200, 700]);
 
 var g = svg.append("g")
     .attr("transform", "translate(0,40)");
