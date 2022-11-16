@@ -6,7 +6,7 @@ var rateById = d3.map();
 
 var color = d3.scaleThreshold()
     .domain([1, 2, 5, 10, 20, 30, 40, 50])
-    .range(d3.schemeOrRd[9]);
+    .range(d3.schemeYlGn[9]);
 
 var projection = d3.geoConicConformal()
     .scale(600)
@@ -53,60 +53,8 @@ g.call(d3.axisBottom(x)
 
 d3.queue()
     .defer(d3.json, "europe-10m.json")
+    .defer(d3.csv, "Player-Density.csv", function(d) { rateById.set(d.Country, +d.Amount);})
     .await(ready);
-    
- d3.select("button")
-    .on("click", function(d, i) {
-      var self = d3.select(this);
-      if (self.text() == "Change to Blue") {
-          self.text('Change to Red');
-          color.range(d3.schemeGnBu[9]);
-          d3.selectAll("rect")
-            .style("fill", function(d) {return color(d[0]);})
-          d3.selectAll("path")
-            .style("fill", function(d) {return color(rateById.get(d.id));})
-      }else{
-          self.text('Change to Blue');
-          color.range(d3.schemeOrRd[9]);
-          d3.selectAll("rect")
-            .style("fill", function(d) {return color(d[0]);})
-          d3.selectAll("path")
-            .style("fill", function(d) {return color(rateById.get(d.id));})
-      }
-  });
-    
-  d3.select("button")
-    .on("click", function(d, i) {
-      var self = d3.select(this);
-      if (self.text() == "Turn County Off") {
-          self.text('Turn County On');
-          color.range(d3.schemeGnBu[9]);
-          d3.selectAll("rect")
-            .style("fill", function(d) {return color(d[0]);})
-          d3.selectAll("path")
-            .style("fill", function(d) {return color(rateById.get(d.id));})
-      }else{
-          self.text('Turn County Off');
-          color.range(d3.schemeOrRd[9]);
-          d3.selectAll("rect")
-            .style("fill", function(d) {return color(d[0]);})
-          d3.selectAll("path")
-            .style("fill", function(d) {return color(rateById.get(d.id));})
-      }
-  });
-
-var toggle = false;
-function toggleboundaries(){
-  if (!toggle) {
-     d3.selectAll("path")
-        .style("stroke", "#FFF")
-     toggle = true           
-  } else if (toggle) {
-    d3.selectAll("path")
-        .style("stroke", function(d) { if (rateById.has(d.id)){return "000"; }})
-     toggle = false  
-  }   
-}
 
 var tooltip = d3.select("body")
         .append("div")
@@ -121,13 +69,15 @@ function ready(error, europe) {
     .selectAll("path")
       .data(topojson.feature(europe, europe.objects.continent_Europe_subunits).features)
     .enter().append("path")
-      .attr("fill", "#ADD8E6")
+      .attr("fill", function(d) { if (rateById.get(d.properties.geounit)){return color(rateById.get(d.properties.geounit)); } else {console.log(d.properties.geounit); return "#FFF"}})
+      .attr("stroke", "#000")
+      .attr("stroke-opacity", 1)
       .attr("d", path)
     .on("mouseover", function(d) {
            tooltip.transition()
              .duration(200)
              .style("opacity", .9);
-           tooltip.html(d.properties.geounit ) 
+           tooltip.html(d.properties.geounit + "<br>" + "<span style='float:left'>" + "Number of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  rateById.get(d.properties.geounit) + "</span>") 
              .style("left", (d3.event.pageX) + "px")
              .style("top", (d3.event.pageY - 28) + "px");
            })
@@ -141,7 +91,7 @@ function ready(error, europe) {
       .attr("class", "counties")
       .datum(topojson.mesh(europe, europe.objects.continent_Europe_subunits, function(a, b) { return a != b; }))
       .attr("stroke", "#000")
-      .attr("stroke-opacity", 0.3)
+      .attr("stroke-opacity", 1)
       .attr("d", path);
     
 }
