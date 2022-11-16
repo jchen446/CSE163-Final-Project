@@ -1,3 +1,4 @@
+//GEOMAP
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
@@ -69,7 +70,7 @@ function ready(error, europe) {
     .selectAll("path")
       .data(topojson.feature(europe, europe.objects.continent_Europe_subunits).features)
     .enter().append("path")
-      .attr("fill", function(d) { if (rateById.get(d.properties.geounit)){return color(rateById.get(d.properties.geounit)); } else {console.log(d.properties.geounit); return "#FFF"}})
+      .attr("fill", function(d) { if (rateById.get(d.properties.geounit)){return color(rateById.get(d.properties.geounit)); } else {return "#FFF"}})
       .attr("stroke", "#000")
       .attr("stroke-opacity", 1)
       .attr("d", path)
