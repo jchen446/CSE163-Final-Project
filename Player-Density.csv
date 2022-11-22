@@ -1,65 +1,65 @@
-Country,Amount
-France,42
-Serbia,31
-Croatia,22
-Spain,20
-Germany,19
-Lithuania,15
-Greece,14
-Italy,14
-Turkey,14
-Russia,13
-Slovenia,13
-England,12
-Georgia,11
-Montenegro,9
-Ukraine,9
-Bosnia and Herzegovina,7
-Latvia,7
-Czech Republic,5
-Israel,5
-Netherlands,5
-Macedonia,5
-Poland,5
-Bulgaria,3
-Finland,3
-Ireland,3
-Sweden,2
-Switzerland,2
-Austria,1
-Belarus,1
-Belgium,1
-Denmark,1
-Estonia,1
-Hungary,1
-Iceland,1
-Luxembourg,1
-Norway,1
-Portugal,1
-Romania,1
-Slovakia,1
-Albania,0
-Aland,0
-Andorra,0
-Brussels Capital Region,0
-Flemish Region,0
-Republic Srpska,0
-Walloon Region,0
-Faroe Islands,0
-Guernsey,0
-Gibraltar,0
-Isle of Man,0
-Jersey,0
-Kosovo,0
-Liechtenstein,0
-Monaco,0
-Moldova,0
-Malta,0
-Northern Ireland,0
-Jan Mayen,0
-Svalbard,0
-Scotland,0
-San Marino,0
-Vojvodina,0
-Vatican,0
-Wales,0
+Country,Amount,Minutes,Salaries
+France,42,14.6,1237203473
+Serbia,28,8.9,490559466
+Croatia,23,16.6,362747979
+Spain,20,19.5,900845128
+Germany,17,18.1,622767537
+Lithuania,15,16.6,452497784
+Greece,14,12.7,282377045
+Turkey,14,17.3,487675241
+Italy,13,15.9,344305627
+Russia,13,11.7,222223692
+Slovenia,13,14.8,391388633
+England,11,17,330220265
+Georgia,11,8.9,99656257
+Ukraine,8,11.7,108595525
+Bosnia and Herzegovina,8,12,128123817
+Montenegro,7,15.5,230621704
+Latvia,7,16.5,222841721
+Czech Republic,5,14.9,58802930
+Israel,5,15.2,46177514
+Netherlands,5,17,94167637
+Macedonia,5,8.5,3931742
+Poland,5,12.5,107826400
+Finland,3,15.9,53929030
+Ireland,3,10.7,9598946
+Sweden,2,18.6,35664379
+Switzerland,2,23.4,134852662
+Austria,1,21.3,38481806
+Belarus,1,6,217301
+Belgium,1,6.3,10673747
+Denmark,1,11,502000
+Estonia,1,11.5,1839320
+Hungary,1,13.5,988941
+Iceland,1,14.3,450000
+Luxembourg,1,5.5,332817
+Norway,1,3.3,200000
+Portugal,1,8,502000
+Romania,1,26.2,8848500
+Slovakia,1,4.2,205000
+Bulgaria,0,0,0
+Albania,0,0,0
+Aland,0,0,0
+Andorra,0,0,0
+Brussels Capital Region,0,0,0
+Flemish Region,0,0,0
+Republic Srpska,0,0,0
+Walloon Region,0,0,0
+Faroe Islands,0,0,0
+Guernsey,0,0,0
+Gibraltar,0,0,0
+Isle of Man,0,0,0
+Jersey,0,0,0
+Kosovo,0,0,0
+Liechtenstein,0,0,0
+Monaco,0,0,0
+Moldova,0,0,0
+Malta,0,0,0
+Northern Ireland,0,0,0
+Jan Mayen,0,0,0
+Svalbard,0,0,0
+Scotland,0,0,0
+San Marino,0,0,0
+Vojvodina,0,0,0
+Vatican,0,0,0
+Wales,0,0,0

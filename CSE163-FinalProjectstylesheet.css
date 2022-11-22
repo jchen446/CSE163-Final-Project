@@ -1,3 +1,7 @@
+* {
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
 .counties {
   fill: none;
   stroke: "#000";
@@ -11,15 +15,15 @@
 }
 
 div.tooltip {
+  color: white;
   position: absolute;
   text-align: center;
-  width: 200px;
-  height: 30px;
+  width: 140px;
+  height: 60px;
   padding: 2px;
   font: 12px sans-serif;
-  background: lightsteelblue;
-  border: 0px;
-  border-radius: 8px;
+  background: rgba(0,0,0,.7);
+  border: 1.5px solid black;
   pointer-events: none;
 }
 

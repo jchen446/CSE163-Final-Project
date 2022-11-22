@@ -10,7 +10,7 @@
     <script type= "text/javascript" src="http://d3js.org/d3.v4.min.js"></script>       
   </head>
   <body>
-    <h1 style = "text-align:center; color:steelblue"><bold>Progression of European Players in the NBA</bold></h1>
+    <h1 style = "text-align:center; color:darkslateblue"><bold>Progression of European Players in the NBA</bold></h1>
     <p>
      The sport of basketball is becoming more of a global game every single year. As television and social media's influence grows internationally, players from Europe are entering the National Basketball Association rapidly. Whether it be by being drafted in the lottery, developing in the G-League, or through highlight plays in FIBA and the Olympics, there are several avenues for European players to make their name known in the NBA.
     </p>
@@ -19,13 +19,13 @@
      We hope to bring light to the outstanding development of basketball talent growing outside of the United States. While there have been over 500 international players in the history of the NBA, over half of them have come from Europe. Some of the greatest players in history have originated from Europe, and we want to visualize this trend starting in 1980 to the NBA today. Our main graphic is a "Geomap'' of Europe which will paint an accurate picture on the disparity of NBA players from country to country. Implemented below is a scale that is used to fluctuate the data of the number of European players over a 5 year period. We collected data on the salaries and minutes played for all European players, and by using a "Multi-line Graph" we have plotted each country's average salary and average minutes played. To give a precise comparison between counties the viewer can select countries to focus on the graph. Finally, we will utilize a "Pie Chart" as a simplistic yet effective way to explain the totality of NBA players from European countries.
     </p>
     <!-- Your D3.js code for making a Bar Graph -->
-    <svg width="960" height="800"></svg>
     <script src="//d3js.org/d3.v4.min.js"></script>
     <script src="//d3js.org/topojson.v2.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <br>
+    <svg width="650" height="800"></svg>
     <script type="text/javascript" src="GeoMap.js"></script>
     <script type="text/javascript" src="MultiLineChart.js"></script>
+    <script type="text/javascript" src="PieChart.js"></script>
     <!-- Submission Info -->
     <div class = "note" id ="note"  style="position:relative;right:0px; font-size:16px; text-align:center;" id="myParagraph">
         <div class = 'author'>
@@ -42,7 +42,15 @@
         <div class="row">
           <div class="column left">
             <b>Files Submitted</b>
-            <p>CSE163-FinalProject.html<br>CSE163-FinalProjectstylesheet.css<br>MultiLineChart.js<br>Multi-Line-Graph-NBA.csv<br>geomap.js<br>Population-Density.csv<br>europe-10m.json<br>minutes$salaries</p>
+            <p>CSE163-FinalProject.html<br>
+                CSE163-FinalProjectstylesheet.css<br>
+                geomap.js<br>
+                MultiLineChart.js<br>
+                PieChart.js<br>
+                europe-10m.json<br>
+                Multi-Line-Graph-NBA.csv<br>
+                Population-Density.csv<br>
+                minutes$salaries.csv</p>
           </div>
           <div class="column middle1">
             <b>Data Sources</b>
@@ -66,7 +74,8 @@
             <p>
             <a data-brackets-id='62' href="https://www.d3indepth.com/geographic/">Making Maps with D3</a><br/>
             <a data-brackets-id='62' href="https://datawanderings.com/2018/10/28/making-a-map-in-d3-js-v-5/">Making a Map in D3 v.5</a><br/>
-            <a data-brackets-id='62' href="https://bl.ocks.org/dianaow/0da76b59a7dffe24abcfa55d5b9e163e">D3 v.4 Multi-line Chart: Hover Tooltip</a>  
+            <a data-brackets-id='62' href="https://bl.ocks.org/dianaow/0da76b59a7dffe24abcfa55d5b9e163e">D3 v.4 Multi-line Chart</a><br/>
+            <a data-brackets-id='62' href="https://codepen.io/zakariachowdhury/pen/OWdyjq">D3 v.4 Pie Chart</a>
             </p>
           </div>
         </div>

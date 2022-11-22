@@ -12,7 +12,7 @@ var color = d3.scaleThreshold()
 var projection = d3.geoConicConformal()
     .scale(600)
     .rotate([15,1])
-    .translate([200, 1200]);
+    .translate([100, 1200]);
 
 var path = d3.geoPath()
     .projection(projection);
@@ -22,7 +22,7 @@ var path = d3.geoPath()
     .rangeRound([200, 700]);
 
 var g = svg.append("g")
-    .attr("transform", "translate(0,40)");
+    .attr("transform", "translate(-150,70)");
 
 g.selectAll("rect")
   .data(color.range().map(function(d) {
@@ -54,7 +54,7 @@ g.call(d3.axisBottom(x)
 
 d3.queue()
     .defer(d3.json, "europe-10m.json")
-    .defer(d3.csv, "Player-Density.csv", function(d) { rateById.set(d.Country, +d.Amount);})
+    .defer(d3.csv, "Player-Density.csv", function(d) { rateById.set(d.Country, +d.Amount, +d.Minutes, +d.Salaries);})
     .await(ready);
 
 var tooltip = d3.select("body")
@@ -78,8 +78,8 @@ function ready(error, europe) {
            tooltip.transition()
              .duration(200)
              .style("opacity", .9);
-           tooltip.html(d.properties.geounit + "<br>" + "<span style='float:left'>" + "Number of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  rateById.get(d.properties.geounit) + "</span>") 
-             .style("left", (d3.event.pageX) + "px")
+           tooltip.html("<strong>" + "<u>" + d.properties.geounit + "</u>" + "</strong>" + "<br>" + "<span style='float:left'>" + "# of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  rateById.get(d.properties.geounit) + "</span>" + "<br>" + "<span style='float:left'>" + "Avg Minutes" + "</span>" + ":" + "<span style='float:right'>" +  rateById.get(d.Minutes) + "</span>" + "<br>" + "<span style='float:left'>" + "Total Income" + "</span>" + ":" + "<span style='float:right'>" + "$" + rateById.get(d.Salaries) + "</span>") 
+               .style("left", (d3.event.pageX) + "px")
              .style("top", (d3.event.pageY - 28) + "px");
            })
     .on("mouseout", function(d) {
