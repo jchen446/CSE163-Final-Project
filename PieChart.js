@@ -9,11 +9,15 @@ function rowConverter(data) {
 d3.csv("Player-Density.csv", type, function(error, data) {
     if (error) throw error;
     rowConverter(data);
-    //console.log(data)
+    //console.log(data);
 });
 
 
 var data = {UK: 9, Croatia: 20, France:30, Germany:8, Lithuania:12};
+var dataIncome = {UK:330220265, Croatia: 362747979, France: 1237203473, Germany: 622767537, Lithuania: 452497784};
+var dataMinutes = {UK: 17, Croatia: 16.6, France: 14.6, Germany: 18.1, Lithuania: 16.6}
+
+
 var width2 = 450,
     height2 = 450,
     radius = Math.min(width2, height2) / 2;
@@ -34,6 +38,10 @@ var pie = d3.pie()
     .value(function(d) { return d.value; });
 
 var data_ready = pie(d3.entries(data))
+var data_ready1 = pie(d3.entries(dataIncome))
+var data_ready2 = pie(d3.entries(dataMinutes))
+
+
 
 var tooltip = d3.select("body")
         .append("div")
@@ -61,7 +69,7 @@ var svg2 = d3.select("body").append("svg")
            tooltip.transition()
              .duration(200)
              .style("opacity", .9);
-           tooltip.html("<strong>" + "<u>" + d.data.key + "</u>" + "</strong>" + "<br>" + "<span style='float:left'>" + "# of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  d.data.value + "</span>" + "<br>" + "<span style='float:left'>" + "Avg Minutes" + "</span>" + ":" + "<span style='float:right'>" +  0 + "</span>" + "<br>" + "<span style='float:left'>" + "Total Income" + "</span>" + ":" + "<span style='float:right'>" + "$" + 0 + "</span>") 
+           tooltip.html("<strong>" + "<u>" + d.data.key + "</u>" + "</strong>" + "<br>" + "<span style='float:left'>" + "# of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  d.data.value + "</span>" + "<br>" + "<span style='float:left'>" + "Avg Minutes" + "</span>" + ":" + "<span style='float:right'>" +  dataMinutes[d.data.key] + "</span>" + "<br>" + "<span style='float:left'>" + "Total Income" + "</span>" + ":" + "<span style='float:right'>" + "$" + dataIncome[d.data.key] + "</span>") 
              .style("left", (d3.event.pageX) + "px")
              .style("top", (d3.event.pageY - 28) + "px");
            })
@@ -70,7 +78,6 @@ var svg2 = d3.select("body").append("svg")
              .duration(500)
              .style("opacity", 0);
            });
-
   g.append("text")
       .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
       .attr("dy", ".35em")
