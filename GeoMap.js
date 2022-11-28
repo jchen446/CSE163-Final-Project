@@ -44,7 +44,7 @@ g.append("text")
     .attr("fill", "#000")
     .attr("text-anchor", "start")
     .attr("font-weight", "bold")
-    .text("Population per square mile");
+    .text("Number of NBA Players");
 
 g.call(d3.axisBottom(x)
     .tickSize(13)
