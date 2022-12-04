@@ -33,7 +33,10 @@ var labelArc = d3.arc()
     .innerRadius(radius - 40);
     
 var pie = d3.pie()
-    .value(function(d) { return d.Amount; });
+    .value(function(d) 
+    { if(d.Amount > 0){
+        return d.Amount
+    }});
 
 var tooltip = d3.select("body")
         .append("div")
@@ -47,7 +50,7 @@ var svg2 = d3.select("body").append("svg")
     .attr("transform", "translate(" + width2 / 2 + "," + height2 / 2 + ")");
 
 
-d3.csv("Player-Density.csv", type, function(error, data) {
+d3.csv("Player-Density2.csv", type, function(error, data) {
     if (error) throw error;
     rowConverter(data);
     console.log(data);
@@ -62,7 +65,10 @@ var g = svg2.selectAll(".arc")
       .attr("stroke", "black")
       .style("stroke-width", "1.5px")
       .style("opacity", 0.8)
-      .style("fill", function(d) { return color2(d.data.Amount); })
+    .style("fill", function(d) {
+      if(d.data.Amount > 0){
+          return color2(d.data.Amount)
+      };})
 
       .on("mouseover", function(d) {
            tooltip.transition()
