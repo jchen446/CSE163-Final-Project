@@ -302,7 +302,7 @@ function mFunc(){
         .attr("y", -60)     
         .attr("dy", "0.71em")
         .attr("fill", "#000")
-        .text("Average Minutes Played per Country");
+        .text("Average Minutes Played per Country (MPG)");
     
     var country = graph.selectAll(".country")
         .data(countries)
@@ -398,7 +398,7 @@ function sFunc(){
         .attr("y", -80)     
         .attr("dy", "0.71em")
         .attr("fill", "#000")
-        .text("Total NBA Income per Country");
+        .text("Total NBA Income per Country ($)");
     
     var country = graph.selectAll(".country")
         .data(countries)
