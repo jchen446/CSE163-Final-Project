@@ -6,6 +6,9 @@ function rowConverter(data) {
         salaries: +data.salaries
     }
 }
+ var getAngle = function (d) {
+      return (180 / Math.PI * (d.startAngle + d.endAngle) / 2 - 90);
+  };
 var width2 = 450,
     height2 = 450,
     radius = Math.min(width2, height2) / 2;
@@ -59,8 +62,7 @@ var g = svg2.selectAll(".arc")
       .attr("stroke", "black")
       .style("stroke-width", "1.5px")
       .style("opacity", 0.8)
-//      .style("fill", function(d) { return color2(d.data.Amount); })
-        .style("fill", function(d) { return color2(d.data.Amount); })
+      .style("fill", function(d) { return color2(d.data.Amount); })
 
       .on("mouseover", function(d) {
            tooltip.transition()
@@ -79,7 +81,7 @@ var g = svg2.selectAll(".arc")
       .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
       .attr("dy", ".35em")
       .style("text-anchor", "middle")
-      .style("font-size", 17)
+      .style("font-size", function(d) { return (45 / (42/d.data.Amount)) } )
       .text(function(d) { return d.data.Country;});
-});
 
+});
