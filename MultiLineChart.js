@@ -44,7 +44,7 @@ function gridYaxis() {
 }
 
 // Get the data
-d3.csv("Multi-Line-Graph-NBA.csv", type, function(error, data) {
+d3.csv("players-timeline.csv", type, function(error, data) {
     if (error) throw error;
     var countries = data.columns.slice(1).map(function(id) {
         return {
