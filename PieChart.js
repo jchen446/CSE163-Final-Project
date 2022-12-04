@@ -6,25 +6,20 @@ function rowConverter(data) {
         salaries: +data.salaries
     }
 }
-d3.csv("Player-Density.csv", type, function(error, data) {
-    if (error) throw error;
-    rowConverter(data);
-    //console.log(data);
-});
-
-
-var data = {UK: 9, Croatia: 20, France:30, Germany:8, Lithuania:12};
-var dataIncome = {UK:330220265, Croatia: 362747979, France: 1237203473, Germany: 622767537, Lithuania: 452497784};
-var dataMinutes = {UK: 17, Croatia: 16.6, France: 14.6, Germany: 18.1, Lithuania: 16.6}
-
-
 var width2 = 450,
     height2 = 450,
     radius = Math.min(width2, height2) / 2;
 
-var color2 = d3.scaleOrdinal()
-    .domain(data)
-    .range(d3.schemeSet2);
+var color2 = d3.scaleOrdinal(["#a28f3e",
+"#7964cc",
+"#75b140",
+"#c24dad",
+"#52aa7e",
+"#d8405c",
+"#608ccb",
+"#cc6d3a",
+"#c684c3",
+"#bb5e73"]);
 
 var arc = d3.arc()
     .outerRadius(radius)
@@ -33,15 +28,9 @@ var arc = d3.arc()
 var labelArc = d3.arc()
     .outerRadius(radius - 40)
     .innerRadius(radius - 40);
-
+    
 var pie = d3.pie()
-    .value(function(d) { return d.value; });
-
-var data_ready = pie(d3.entries(data))
-var data_ready1 = pie(d3.entries(dataIncome))
-var data_ready2 = pie(d3.entries(dataMinutes))
-
-
+    .value(function(d) { return d.Amount; });
 
 var tooltip = d3.select("body")
         .append("div")
@@ -54,9 +43,15 @@ var svg2 = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + width2 / 2 + "," + height2 / 2 + ")");
 
-  var g = svg2.selectAll(".arc")
-      .data(data_ready)
-    .enter().append("g")
+
+d3.csv("Player-Density.csv", type, function(error, data) {
+    if (error) throw error;
+    rowConverter(data);
+    console.log(data);
+
+var g = svg2.selectAll(".arc")
+      .data(pie(data))
+      .enter().append("g")
       .attr("class", "arc");
 
   g.append("path")
@@ -64,12 +59,14 @@ var svg2 = d3.select("body").append("svg")
       .attr("stroke", "black")
       .style("stroke-width", "1.5px")
       .style("opacity", 0.8)
-      .style("fill", function(d) { return color2(d.data.key); })
+//      .style("fill", function(d) { return color2(d.data.Amount); })
+        .style("fill", function(d) { return color2(d.data.Amount); })
+
       .on("mouseover", function(d) {
            tooltip.transition()
              .duration(200)
              .style("opacity", .9);
-           tooltip.html("<strong>" + "<u>" + d.data.key + "</u>" + "</strong>" + "<br>" + "<span style='float:left'>" + "# of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  d.data.value + "</span>" + "<br>" + "<span style='float:left'>" + "Avg Minutes" + "</span>" + ":" + "<span style='float:right'>" +  dataMinutes[d.data.key] + "</span>" + "<br>" + "<span style='float:left'>" + "Total Income" + "</span>" + ":" + "<span style='float:right'>" + "$" + dataIncome[d.data.key] + "</span>") 
+           tooltip.html("<strong>" + "<u>" + d.data.Country + "</u>" + "</strong>" + "<br>" + "<span style='float:left'>" + "# of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  d.data.Amount + "</span>" + "<br>" + "<span style='float:left'>" + "Avg Minutes" + "</span>" + ":" + "<span style='float:right'>" +  d.data.Minutes + "</span>" + "<br>" + "<span style='float:left'>" + "Total Income" + "</span>" + ":" + "<span style='float:right'>" + "$" + d.data.Salaries+ "</span>") 
              .style("left", (d3.event.pageX) + "px")
              .style("top", (d3.event.pageY - 28) + "px");
            })
@@ -83,4 +80,6 @@ var svg2 = d3.select("body").append("svg")
       .attr("dy", ".35em")
       .style("text-anchor", "middle")
       .style("font-size", 17)
-      .text(function(d) { return d.data.key;});
+      .text(function(d) { return d.data.Country;});
+});
+
