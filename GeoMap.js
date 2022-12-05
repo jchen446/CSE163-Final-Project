@@ -74,6 +74,7 @@ function ready(error, europe) {
       .attr("stroke", "#000")
       .attr("stroke-opacity", 1)
       .attr("d", path)
+    
     .on("mouseover", function(d) {
            tooltip.transition()
              .duration(200)
@@ -94,5 +95,17 @@ function ready(error, europe) {
       .attr("stroke", "#000")
       .attr("stroke-opacity", 1)
       .attr("d", path);
+    
+    labels = svg.selectAll("text")
+        .data(topojson.feature(europe, europe.objects.continent_Europe_subunits).features)
+        .enter()
+        .append("text")
+        .attr("x", function(d) { if(path.centroid(d)[0]){return path.centroid(d)[0]; }})
+        .attr("y", function(d) { if(path.centroid(d)[1]){return path.centroid(d)[1]; }})
+        .text(function(d){
+            return d.properties.geounit;
+        })
+        .attr("text-anchor","middle")
+        .attr('font-size','6pt');
     
 }
