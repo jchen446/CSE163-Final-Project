@@ -83,7 +83,7 @@ function ready(error, europe) {
            tooltip.transition()
              .duration(200)
              .style("opacity", .9);
-           tooltip.html("<strong>" + "<u>" + d.properties.geounit + "</u>" + "</strong>" + "<br>" + "<span style='float:left'>" + "# of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  rateByAmount.get(d.properties.geounit) + "</span>" + "<br>" + "<span style='float:left'>" + "Avg Minutes" + "</span>" + ":" + "<span style='float:right'>" +  rateByMinutes.get(d.properties.geounit) + "</span>" + "<br>" + "<span style='float:left'>" + "Total Income" + "</span>" + ":" + "<span style='float:right'>" + "$" + rateBySalaries.get(d.properties.geounit) + "</span>") 
+           tooltip.html("<strong>" + "<u>" + d.properties.geounit + "</u>" + "</strong>" + "<br>" + "<span style='float:left'>" + "# of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  rateByAmount.get(d.properties.geounit) + "</span>" + "<br>" + "<span style='float:left'>" + "Avg Minutes" + "</span>" + ":" + "<span style='float:right'>" +  rateByMinutes.get(d.properties.geounit) + "</span>" + "<br>" + "<span style='float:left'>" + "Total Income" + "</span>" + ":" + "<span style='float:right'>" + "$" + rateBySalaries.get(d.properties.geounit).toLocaleString() + "</span>") 
                .style("left", (d3.event.pageX) + "px")
              .style("top", (d3.event.pageY - 28) + "px");
            })
