@@ -3,7 +3,9 @@ var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
 
-var rateById = d3.map();
+var rateByAmount = d3.map();
+var rateByMinutes = d3.map();
+var rateBySalaries = d3.map();
 
 var color = d3.scaleThreshold()
     .domain([1, 2, 5, 10, 20, 30, 40, 50])
@@ -54,7 +56,9 @@ g.call(d3.axisBottom(x)
 
 d3.queue()
     .defer(d3.json, "europe-10m.json")
-    .defer(d3.csv, "Player-Density.csv", function(d) { rateById.set(d.Country, +d.Amount, +d.Minutes, +d.Salaries);})
+    .defer(d3.csv, "Player-Density.csv", function(d) { rateByAmount.set(d.Country, +d.Amount);})
+    .defer(d3.csv, "Player-Density.csv", function(d) { rateByMinutes.set(d.Country, +d.Minutes);})
+    .defer(d3.csv, "Player-Density.csv", function(d) { rateBySalaries.set(d.Country, +d.Salaries);})
     .await(ready);
 
 var tooltip = d3.select("body")
@@ -70,7 +74,7 @@ function ready(error, europe) {
     .selectAll("path")
       .data(topojson.feature(europe, europe.objects.continent_Europe_subunits).features)
     .enter().append("path")
-      .attr("fill", function(d) { if (rateById.get(d.properties.geounit)){return color(rateById.get(d.properties.geounit)); } else {return "#FFF"}})
+      .attr("fill", function(d) { if (rateByAmount.get(d.properties.geounit)){return color(rateByAmount.get(d.properties.geounit)); } else {return "#FFF"}})
       .attr("stroke", "#000")
       .attr("stroke-opacity", 1)
       .attr("d", path)
@@ -79,10 +83,11 @@ function ready(error, europe) {
            tooltip.transition()
              .duration(200)
              .style("opacity", .9);
-           tooltip.html("<strong>" + "<u>" + d.properties.geounit + "</u>" + "</strong>" + "<br>" + "<span style='float:left'>" + "# of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  rateById.get(d.properties.geounit) + "</span>" + "<br>" + "<span style='float:left'>" + "Avg Minutes" + "</span>" + ":" + "<span style='float:right'>" +  rateById.get(d.Minutes) + "</span>" + "<br>" + "<span style='float:left'>" + "Total Income" + "</span>" + ":" + "<span style='float:right'>" + "$" + rateById.get(d.Salaries) + "</span>") 
+           tooltip.html("<strong>" + "<u>" + d.properties.geounit + "</u>" + "</strong>" + "<br>" + "<span style='float:left'>" + "# of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  rateByAmount.get(d.properties.geounit) + "</span>" + "<br>" + "<span style='float:left'>" + "Avg Minutes" + "</span>" + ":" + "<span style='float:right'>" +  rateByMinutes.get(d.properties.geounit) + "</span>" + "<br>" + "<span style='float:left'>" + "Total Income" + "</span>" + ":" + "<span style='float:right'>" + "$" + rateBySalaries.get(d.properties.geounit) + "</span>") 
                .style("left", (d3.event.pageX) + "px")
              .style("top", (d3.event.pageY - 28) + "px");
            })
+          
     .on("mouseout", function(d) {
            tooltip.transition()
              .duration(500)

@@ -14,6 +14,17 @@ var graph = d3.select("body")
     .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
 
+var color3 = d3.scaleOrdinal(["#a28f3e",
+"#7964cc",
+"#75b140",
+"#c24dad",
+"#52aa7e",
+"#d8405c",
+"#608ccb",
+"#cc6d3a",
+"#c684c3",
+"#bb5e73"]);
+
 // Parse the date / time
 var parseTime = d3.timeParse("%Y");
 
@@ -115,7 +126,7 @@ d3.csv("players-timeline.csv", type, function(error, data) {
     var path = country.append("path")
         .attr("class", "line")
         .attr("d", function(d) {  return line(d.values); })
-        .style("stroke", function(d) { return z(d.id); })
+        .style("stroke", function(d) { return color3(d.id); })
     
     var pathLength = path.node().getTotalLength();
         path
@@ -216,7 +227,7 @@ function pFunc(){
     var path = country.append("path")
         .attr("class", "line")
         .attr("d", function(d) {  return line(d.values); })
-        .style("stroke", function(d) { return z(d.id); })
+        .style("stroke", function(d) { return color3(d.id); })
     
     var pathLength = path.node().getTotalLength();
         path
@@ -312,7 +323,7 @@ function mFunc(){
     var path = country.append("path")
         .attr("class", "line")
         .attr("d", function(d) {  return line(d.values); })
-        .style("stroke", function(d) { return z(d.id); })
+        .style("stroke", function(d) { return color3(d.id); })
     
     var pathLength = path.node().getTotalLength();
         path
@@ -408,7 +419,7 @@ function sFunc(){
     var path = country.append("path")
         .attr("class", "line")
         .attr("d", function(d) {  return line(d.values); })
-        .style("stroke", function(d) { return z(d.id); })
+        .style("stroke", function(d) { return color3(d.id); })
     
     var pathLength = path.node().getTotalLength();
         path
