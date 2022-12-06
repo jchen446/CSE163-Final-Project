@@ -50,7 +50,7 @@ var svg2 = d3.select("body").append("svg")
     .attr("transform", "translate(" + width2 / 2 + "," + height2 / 2 + ")");
 
 
-d3.csv("Player-Density2.csv", type, function(error, data) {
+d3.csv("pie-data.csv", type, function(error, data) {
     if (error) throw error;
     rowConverter(data);
     console.log(data);
@@ -74,7 +74,7 @@ var g = svg2.selectAll(".arc")
            tooltip.transition()
              .duration(200)
              .style("opacity", .9);
-           tooltip.html("<strong>" + "<u>" + d.data.Country + "</u>" + "</strong>" + "<br>" + "<span style='float:left'>" + "# of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  d.data.Amount + "</span>" + "<br>" + "<span style='float:left'>" + "Avg Minutes" + "</span>" + ":" + "<span style='float:right'>" +  d.data.Minutes + "</span>" + "<br>" + "<span style='float:left'>" + "Total Income" + "</span>" + ":" + "<span style='float:right'>" + "$" + d.data.Salaries+ "</span>") 
+           tooltip.html("<strong>" + "<u>" + d.data.Country + "</u>" + "</strong>" + "<br>" + "<span style='float:left'>" + "# of NBA Players" + "</span>" + ":" + "<span style='float:right'>" +  d.data.Amount + "</span>" + "<br>" + "<span style='float:left'>" + "Avg Minutes" + "</span>" + ":" + "<span style='float:right'>" +  d.data.Minutes + "</span>" + "<br>" + "<span style='float:left'>" + "Total Income" + "</span>" + ":" + "<span style='float:right'>" + "$" + d.data.Salaries.toLocaleString()+ "</span>") 
              .style("left", (d3.event.pageX) + "px")
              .style("top", (d3.event.pageY - 28) + "px");
            })
