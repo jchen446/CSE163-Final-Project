@@ -56,9 +56,9 @@ g.call(d3.axisBottom(x)
 
 d3.queue()
     .defer(d3.json, "europe-10m.json")
-    .defer(d3.csv, "Player-Density.csv", function(d) { rateByAmount.set(d.Country, +d.Amount);})
-    .defer(d3.csv, "Player-Density.csv", function(d) { rateByMinutes.set(d.Country, +d.Minutes);})
-    .defer(d3.csv, "Player-Density.csv", function(d) { rateBySalaries.set(d.Country, +d.Salaries);})
+    .defer(d3.csv, "player-density.csv", function(d) { rateByAmount.set(d.Country, +d.Amount);})
+    .defer(d3.csv, "player-density.csv", function(d) { rateByMinutes.set(d.Country, +d.Minutes);})
+    .defer(d3.csv, "player-density.csv", function(d) { rateBySalaries.set(d.Country, +d.Salaries);})
     .await(ready);
 
 var tooltip = d3.select("body")
