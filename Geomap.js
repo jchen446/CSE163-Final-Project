@@ -140,6 +140,7 @@ function reset(){
     .defer(d3.csv, "player-density.csv", function(d) { rateByMinutes.set(d.Country, +d.Minutes);})
     .defer(d3.csv, "player-density.csv", function(d) { rateBySalaries.set(d.Country, +d.Salaries);})
     .await(ready);
+      d3.select('p#value-simple').text('1980-2020');
 }
 
 
