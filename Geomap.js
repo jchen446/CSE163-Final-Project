@@ -128,10 +128,19 @@ function updateGeo(val){
     .defer(d3.csv, "player-density.csv", function(d) { rateByMinutes.set(d.Country, +d.Minutes);})
     .defer(d3.csv, "player-density.csv", function(d) { rateBySalaries.set(d.Country, +d.Salaries);})
     .await(ready);
+    
  
 
 };
-
+function reset(){
+    
+    d3.queue()
+    .defer(d3.json, "europe-10m.json")
+    .defer(d3.csv, "player-density.csv", function(d) { rateByAmount.set(d.Country, +d.Amount);})
+    .defer(d3.csv, "player-density.csv", function(d) { rateByMinutes.set(d.Country, +d.Minutes);})
+    .defer(d3.csv, "player-density.csv", function(d) { rateBySalaries.set(d.Country, +d.Salaries);})
+    .await(ready);
+}
 
 
 
