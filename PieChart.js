@@ -53,7 +53,6 @@ var svg2 = d3.select("body").append("svg")
 d3.csv("pie-data.csv", type, function(error, data) {
     if (error) throw error;
     rowConverter(data);
-    console.log(data);
 
 var g = svg2.selectAll(".arc")
       .data(pie(data))

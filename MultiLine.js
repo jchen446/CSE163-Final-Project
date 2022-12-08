@@ -25,6 +25,42 @@ var color3 = d3.scaleOrdinal(["#a28f3e",
 "#c684c3",
 "#bb5e73"]);
 
+var grayC = "FAKE"
+var pStatus = 0;
+var mStatus = 0;
+var sStatus = 0;
+
+
+function grayout(country) {
+    grayC = country;
+    if (mStatus) {
+        mFunc();
+    } else if (sStatus){
+        sFunc();
+    }else {
+        pFunc();
+    }
+}
+
+function compare(sub, c){
+    if (grayC.localeCompare(sub) && grayC.localeCompare("FAKE")){
+         return "#e7e7e7";
+    } else {
+      return c;
+    }
+}
+
+function colorReset(){
+    grayC = "FAKE"
+    if (mStatus) {
+        mFunc();
+    } else if (sStatus){
+        sFunc();
+    }else {
+        pFunc();
+    }
+}
+
 // Parse the date / time
 var parseTime = d3.timeParse("%Y");
 
@@ -127,7 +163,6 @@ d3.csv("players-timeline.csv", type, function(error, data) {
         .attr("class", "line")
         .attr("d", function(d) {  return line(d.values); })
         .style("stroke", function(d) { return color3(d.id); })
-    
     var pathLength = path.node().getTotalLength();
         path
         .attr("stroke-dasharray", pathLength + " " + pathLength)
@@ -143,6 +178,7 @@ d3.csv("players-timeline.csv", type, function(error, data) {
         .attr("x", 3)
         .attr("dy", "0.35em")
         .style("font", "10px sans-serif")
+        .style("stroke", function(d) { return compare(d.id,color3(d.id));})
         .text(function(d) { return d.id; });
 });
 
@@ -155,6 +191,9 @@ function type(d, _, columns) {
 var pButton = d3.select("#pButton")
         .on("click", pFunc)
 function pFunc(){
+    pStatus = 1;
+    mStatus = 0;
+    sStatus = 0;
     graph.selectAll("*").remove();
     d3.csv("players-timeline.csv", type, function(error, data) {
     if (error) throw error;
@@ -227,7 +266,7 @@ function pFunc(){
     var path = country.append("path")
         .attr("class", "line")
         .attr("d", function(d) {  return line(d.values); })
-        .style("stroke", function(d) { return color3(d.id); })
+        .style("stroke", function(d) { return compare(d.id,color3(d.id));})
     
     var pathLength = path.node().getTotalLength();
         path
@@ -244,6 +283,7 @@ function pFunc(){
         .attr("x", 3)
         .attr("dy", "0.35em")
         .style("font", "10px sans-serif")
+        .style("stroke", function(d) { return compare(d.id,color3(d.id));})
         .text(function(d) { return d.id; });
 });
 }
@@ -251,6 +291,9 @@ function pFunc(){
 var mButton = d3.select("#mButton")
         .on("click", mFunc)
 function mFunc(){
+    pStatus = 0;
+    mStatus = 1;
+    sStatus = 0;
     graph.selectAll("*").remove();
     d3.csv("minutes-timeline.csv", type, function(error, data) {
     if (error) throw error;
@@ -323,7 +366,7 @@ function mFunc(){
     var path = country.append("path")
         .attr("class", "line")
         .attr("d", function(d) {  return line(d.values); })
-        .style("stroke", function(d) { return color3(d.id); })
+        .style("stroke", function(d) { return compare(d.id,color3(d.id)); })
     
     var pathLength = path.node().getTotalLength();
         path
@@ -340,6 +383,7 @@ function mFunc(){
         .attr("x", 3)
         .attr("dy", "0.35em")
         .style("font", "10px sans-serif")
+        .style("stroke", function(d) { return compare(d.id,color3(d.id));})
         .text(function(d) { return d.id; });
 });
 }
@@ -347,6 +391,9 @@ function mFunc(){
 var sButton = d3.select("#sButton")
         .on("click", sFunc)
 function sFunc(){
+    pStatus = 0;
+    mStatus = 0;
+    sStatus = 1;
     graph.selectAll("*").remove();
     d3.csv("salaries-timeline.csv", type, function(error, data) {
     if (error) throw error;
@@ -419,7 +466,7 @@ function sFunc(){
     var path = country.append("path")
         .attr("class", "line")
         .attr("d", function(d) {  return line(d.values); })
-        .style("stroke", function(d) { return color3(d.id); })
+        .style("stroke", function(d) { return compare(d.id,color3(d.id)); })
     
     var pathLength = path.node().getTotalLength();
         path
@@ -436,6 +483,7 @@ function sFunc(){
         .attr("x", 3)
         .attr("dy", "0.35em")
         .style("font", "10px sans-serif")
+        .style("stroke", function(d) { return compare(d.id,color3(d.id));})
         .text(function(d) { return d.id; });
 });
 }

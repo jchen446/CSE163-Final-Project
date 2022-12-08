@@ -92,7 +92,7 @@ function ready(error, europe) {
            tooltip.transition()
              .duration(500)
              .style("opacity", 0);
-           });
+           }).on('click', function(d) {grayout(d.properties.geounit)});
     
     boundaries = svg.append("path")
       .attr("class", "counties")
