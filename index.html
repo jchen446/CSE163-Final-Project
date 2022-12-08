@@ -20,9 +20,17 @@
     <script src="//d3js.org/d3.v4.min.js"></script>
     <script src="//d3js.org/topojson.v2.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    
+<script src="https://unpkg.com/d3-simple-slider"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-dsv@3"></script>
+
+
     <h2 style = "text-align:left; "><bold>Geomap of European NBA Player Population</bold></h2>
     <u>Geomap Time Period Slider:</u>&ensp;
-    <input type="range" name="slider" id=slider min="1980" max="2022" value="2022" step="6"><br>
+  <div class="row align-items-center">
+    <div class="col-sm-2"><p id="value-simple"></p></div>
+    <div class="col-sm"><div id="slider-simple"></div></div>
+  </div>
     <svg width="650" height="800"></svg>
     <script type="text/javascript" src="Geomap.js"></script>
     <h2 style = "text-align:left; "><bold>Multi-Line Graph of European NBA Stats(1980-2022)</bold></h2>

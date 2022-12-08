@@ -122,7 +122,7 @@ function updateGeo(val){
         
         
          
-        rateByAmount.set(d.Country, AmountByYear[d.Country])
+        rateByAmount.set(d.Country, +AmountByYear[d.Country])
      
         ;})
     .defer(d3.csv, "player-density.csv", function(d) { rateByMinutes.set(d.Country, +d.Minutes);})
