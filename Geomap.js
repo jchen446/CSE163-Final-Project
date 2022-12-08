@@ -7,6 +7,8 @@ var rateByAmount = d3.map();
 var rateByMinutes = d3.map();
 var rateBySalaries = d3.map();
 
+var AmountByYear = d3.map();
+
 var color = d3.scaleThreshold()
     .domain([1, 2, 5, 10, 20, 30, 40, 50])
     .range(d3.schemeYlGn[9]);
@@ -65,10 +67,68 @@ var tooltip = d3.select("body")
         .append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
+
+//slider
+var data = ['1985', '1990', '1995', '2000' ,'2005', '2010', '2015', '2020'];
+
+  var sliderSimple = d3
+    .sliderBottom()
+    .min(d3.min(data))
+    .max(d3.max(data))
+    .width(300)
+    .tickFormat(d3.format(''))
+    .ticks(5)
+    .step(5)
+    .default('1985')
+    .on('onchange', val => {
+      d3.select('p#value-simple').text(val-5+'-' +d3.format('')(val));
+      updateGeo(val);
+        
+    });
+
+  var gSimple = d3
+    .select('div#slider-simple')
+    .append('svg')
+    .attr('width', 500)
+    .attr('height', 100)
+    .append('g')
+    .attr('transform', 'translate(30,30)');
+
+
+  gSimple.call(sliderSimple);
+
+  d3.select('p#value-simple').text('Total:');
+
+
+function updateGeo(val){
+    var ind = parseInt(val);
+    ind = ind - 1980;
     
+    d3.csv("players-timeline.csv", function(data) {
+        
+    if(data[ind].hasOwnProperty('year')){
+        
+       delete data[ind]['year']; 
+    } 
+    AmountByYear=data[ind];
+    console.log(AmountByYear);//data to update into geomap
+    
+    d3.queue()
+    .defer(d3.json, "europe-10m.json")
+    .defer(d3.csv, "player-density.csv", function(d) { rateByAmount.set(d.Country, +Math.random()*20);})
+    .defer(d3.csv, "player-density.csv", function(d) { rateByMinutes.set(d.Country, +d.Minutes);})
+    .defer(d3.csv, "player-density.csv", function(d) { rateBySalaries.set(d.Country, +d.Salaries);})
+    .await(ready);
+ 
+we
+
+});
+}
+
+
+
 function ready(error, europe) {
   if (error) throw error;
-
   density = svg.append("g")
       .attr("class", "counties")
     .selectAll("path")
@@ -79,6 +139,7 @@ function ready(error, europe) {
       .attr("stroke-opacity", 1)
       .attr("d", path)
     
+
     .on("mouseover", function(d) {
            tooltip.transition()
              .duration(200)
@@ -114,3 +175,5 @@ function ready(error, europe) {
         .attr('font-size','6pt');
     
 }
+
+
